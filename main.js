@@ -1,11 +1,11 @@
-let nombreUsuario = prompt("Por favor ingrese su nombre: ");
+let nombreUsuario = prompt("Por favor ingresa tu nombre: ");
 alert("Hola " + nombreUsuario + " bienvenido/a a nuestro sistema de calculos" + "\n(presiona en aceptar)");
 
-let opciones = prompt( nombreUsuario + ", por favor escribi la opcion que desees" + "\n(porcentajes) (operaciones) (sueldo neto)" + "\nsino escribi 'salir' ")
+let opciones = prompt( nombreUsuario + ", por favor escribi la opcion que desees" + "\n(porcentajes) (operaciones) (sueldo neto)" + "\nsi no, para finalizar escribi 'salir' ")
 
 for(let i = 0; i < 3; i++){
     if(opciones == "porcentajes"){
-        let valorPorcentaje = parseInt(prompt("Ingresa el porcentaje que quiere saber: "));
+        let valorPorcentaje = parseInt(prompt("Ingresa el porcentaje que queres saber: "));
         let valorTotal = parseInt(prompt("Ingresa el valor total: "));
         let resultadoPorcentaje = valorTotal * (valorPorcentaje / 100).toFixed(2);
 
@@ -19,16 +19,16 @@ for(let i = 0; i < 3; i++){
 
         switch(operacion){
             case "+":
-                alert(valorUno + valorDos);
+                alert("El resultado es: " + (valorUno + valorDos));
                 break;
             case "-":
-                alert(valorUno - valorDos);
+                alert("El resultado es: " + (valorUno - valorDos));
                 break;
             case "*":
-                alert(valorUno * valorDos);
+                alert("El resultado es: " + (valorUno * valorDos));
                 break;
             case "/":
-                alert(valorUno / valorDos);
+                alert("El resultado es: " + (valorUno / valorDos));
                 break;
             default:
                 alert("operacion incorrecta");
@@ -50,6 +50,6 @@ for(let i = 0; i < 3; i++){
         alert("Muchas gracias por utilizar nuestro sistema de calculos, hasta la proxima!")
         break
     }else{
-        opciones = prompt("Opcion incorrecta, vuelva a intentar escribiendo una de las siguientes opciones: " + "\n(porcentajes) (operaciones) (sueldo neto)" + "\nsino escriba 'salir' ");
+        opciones = prompt("Opcion incorrecta, volve a intentar escribiendo una de las siguientes opciones: " + "\n(porcentajes) (operaciones) (sueldo neto)" + "\nsi no, para finalizar escribi 'salir' ");
     }
 }
