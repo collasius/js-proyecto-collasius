@@ -1,17 +1,23 @@
 let nombreUsuario = prompt("Por favor ingresa tu nombre: ");
-alert("Hola " + nombreUsuario + " bienvenido/a a nuestro sistema de calculos" + "\n(presiona en aceptar)");
+
+function saludarUsuario(nombreUsuario){
+    alert ("Hola " + nombreUsuario + " bienvenido/a a nuestro sistema de calculos" + "\n(presiona en aceptar)");
+}
+saludarUsuario(nombreUsuario);
 
 let opciones = prompt( nombreUsuario + ", por favor escribi la opcion que desees" + "\n(porcentajes) (operaciones) (sueldo neto)" + "\nsi no, para finalizar escribi 'salir' ")
 
+opciones = (opciones.toUpperCase())
+
 for(let i = 0; i < 3; i++){
-    if(opciones == "porcentajes"){
+    if(opciones == "PORCENTAJES"){
         let valorPorcentaje = parseInt(prompt("Ingresa el porcentaje que queres saber: "));
         let valorTotal = parseInt(prompt("Ingresa el valor total: "));
         let resultadoPorcentaje = valorTotal * (valorPorcentaje / 100).toFixed(2);
 
         alert("el " + valorPorcentaje + "% de " + valorTotal + " es: " + resultadoPorcentaje);
         break;
-    }else if(opciones == "operaciones"){
+    }else if(opciones == "OPERACIONES"){
         let valorUno = parseInt(prompt("Ingresa un valor"));
         let valorDos = parseInt(prompt("Ingresa el segundo valor"));
 
@@ -35,7 +41,7 @@ for(let i = 0; i < 3; i++){
                 break;
         }
         break
-    }else if(opciones == "sueldo neto"){
+    }else if(opciones == "SUELDO NETO"){
         let sueldoBruto = parseInt(prompt("Para calcular el sueldo neto, por favor ingrese el valor total del sueldo bruto: "));
 
         let jubilacion = sueldoBruto * 0.11.toFixed(2);
@@ -48,7 +54,7 @@ for(let i = 0; i < 3; i++){
     }
     else if(opciones == "salir"){
         alert("Muchas gracias por utilizar nuestro sistema de calculos, hasta la proxima!")
-        break
+        break;
     }else{
         opciones = prompt("Opcion incorrecta, volve a intentar escribiendo una de las siguientes opciones: " + "\n(porcentajes) (operaciones) (sueldo neto)" + "\nsi no, para finalizar escribi 'salir' ");
     }
