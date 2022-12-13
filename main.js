@@ -1,61 +1,100 @@
-let nombreUsuario = prompt("Por favor ingresa tu nombre: ");
-
-function saludarUsuario(nombreUsuario){
-    alert ("Hola " + nombreUsuario + " bienvenido/a a nuestro sistema de calculos" + "\n(presiona en aceptar)");
+class Linea {
+    constructor(numeroLinea, nombre, fecha) {
+        this.numeroLinea = numeroLinea;
+        this.nombre = nombre;
+        this.fecha = fecha;
+    }
 }
-saludarUsuario(nombreUsuario);
 
-let opciones = prompt( nombreUsuario + ", por favor escribi la opcion que desees" + "\n(porcentajes) (operaciones) (sueldo neto)" + "\nsi no, para finalizar escribi 'salir' ")
+const linea1 = new Linea(1122334455,"Pablo", new Date(2021,0,2,15,45));
+const linea2 = new Linea(1123456789,"Meli", new Date(2021,5,6,13,22));
 
-opciones = (opciones.toUpperCase())
 
-for(let i = 0; i < 3; i++){
-    if(opciones == "PORCENTAJES"){
-        let valorPorcentaje = parseInt(prompt("Ingresa el porcentaje que queres saber: "));
-        let valorTotal = parseInt(prompt("Ingresa el valor total: "));
-        let resultadoPorcentaje = valorTotal * (valorPorcentaje / 100).toFixed(2);
+const arrayLineas = [];
 
-        alert("el " + valorPorcentaje + "% de " + valorTotal + " es: " + resultadoPorcentaje);
+arrayLineas.push(linea1);
+arrayLineas.push(linea2);
+
+function altaLinea() {
+    let numeroLinea = parseInt(prompt("Ingrese su numero de linea: "));
+    let nombre = prompt("Ingrese su nombre de usuario: ");
+    let fecha = new Date();
+    let lineaPrincipal = new Linea(numeroLinea, nombre, fecha);
+    arrayLineas.unshift(lineaPrincipal);
+    alert(`Bienvenid@ ${lineaPrincipal.nombre} a Movijaus`)
+}
+
+const lineaPrincipal = altaLinea();
+
+function menu() {
+    let opcion = parseInt(prompt("Ingrese una opción: \n 1) Alta de Linea \n 2) Baja de Linea \n 3) Modificación de usuario \n 4) Consulta de antiguedad \n 5) Salir"));
+    return opcion;
+}
+
+function altaLineaNueva() {
+    let numeroLinea = parseInt(prompt("Ingrese el numero de linea: "));
+    let nombre = prompt("Ingrese el nombre de usuario: ");
+    let fecha = new Date();
+    let lineaNueva = new Linea(numeroLinea, nombre, fecha);
+    arrayLineas.unshift(lineaNueva);
+    alert(`Bienvenid@ ${lineaNueva.nombre} a Movijaus`)
+}
+
+
+function bajaLinea() {
+    let numeroLinea = parseInt(prompt("Ingrese el numero de linea: "));
+    let linea = arrayLineas.find(linea => linea.numeroLinea === numeroLinea);
+    let indice = arrayLineas.indexOf(linea);
+    let lineaEliminada = arrayLineas.splice(indice, 1);
+
+    alert(`La linea de ${lineaEliminada[0].nombre} ha sido dada de baja.`);
+}
+
+function modificarUsuario() {
+    let numero = parseInt(prompt("Ingrese el numero de linea: "));
+    let linea = arrayLineas.find(linea => linea.numeroLinea === numero);
+    let indice = arrayLineas.indexOf(linea);
+
+    let numeroLinea = parseInt(prompt("Ingrese el numero de linea: "));
+    let nombre = prompt("Ingrese el nombre de usuario: ");
+    let fecha = prompt("Ingrese la fecha de alta ");
+
+    let lineaModificada = new Linea(numeroLinea, nombre, fecha);
+
+    arrayLineas.splice(indice, 1, lineaModificada);
+    alert(`La linea de ${lineaModificada.nombre} ha sido dada modificada.`);
+}
+
+function consultaAntiguedad() {
+    let numeroLinea = parseInt(prompt("Ingrese el numero de linea: "));
+    let linea = arrayLineas.filter(linea => linea.numeroLinea === numeroLinea);
+    let fecha = linea[0].fecha;
+    let nombre = linea[0].nombre;
+    alert(`${nombre} esta con nosotros desde ${fecha.toLocaleString()}`);
+}
+
+function salir() {
+    alert("Gracias por ser Movijaus");
+}
+
+let opcion = menu();
+switch (opcion) {
+    case 1:
+        altaLineaNueva();
         break;
-    }else if(opciones == "OPERACIONES"){
-        let valorUno = parseInt(prompt("Ingresa un valor"));
-        let valorDos = parseInt(prompt("Ingresa el segundo valor"));
-
-        let operacion = prompt("ingresa la operacion \n(+ - * /)");
-
-        switch(operacion){
-            case "+":
-                alert("El resultado es: " + (valorUno + valorDos));
-                break;
-            case "-":
-                alert("El resultado es: " + (valorUno - valorDos));
-                break;
-            case "*":
-                alert("El resultado es: " + (valorUno * valorDos));
-                break;
-            case "/":
-                alert("El resultado es: " + (valorUno / valorDos));
-                break;
-            default:
-                alert("operacion incorrecta");
-                break;
-        }
-        break
-    }else if(opciones == "SUELDO NETO"){
-        let sueldoBruto = parseInt(prompt("Para calcular el sueldo neto, por favor ingrese el valor total del sueldo bruto: "));
-
-        let jubilacion = sueldoBruto * 0.11.toFixed(2);
-        let obraSocial = sueldoBruto * 0.03.toFixed(2);
-        let LeyPami = sueldoBruto * 0.03.toFixed(2);
-        let sueldoNeto = sueldoBruto - jubilacion - obraSocial - LeyPami;
-
-        alert("Total del sueldo bruto: "+ sueldoBruto + "\nDescuentos de jubilacion (11%): " + jubilacion + "\nDescuentos de Obra social (3%): " + obraSocial + "\nDescuentos de Ley 19032 (PAMI) (3%): " + LeyPami + "\nEl sueldo neto total es de: " + sueldoNeto);
+    case 2:
+        bajaLinea();
         break;
-    }
-    else if(opciones == "salir"){
-        alert("Muchas gracias por utilizar nuestro sistema de calculos, hasta la proxima!")
+    case 3:
+        modificarUsuario();
         break;
-    }else{
-        opciones = prompt("Opcion incorrecta, volve a intentar escribiendo una de las siguientes opciones: " + "\n(porcentajes) (operaciones) (sueldo neto)" + "\nsi no, para finalizar escribi 'salir' ");
-    }
+    case 4:
+        consultaAntiguedad();
+        break;
+    case 5:
+        salir();
+        break;
+    default:
+        alert("Opción incorrecta");
+        break;
 }
