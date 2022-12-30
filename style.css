@@ -1,0 +1,176 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+header{
+    margin: 0;
+    padding: 0;
+}
+.encabezado{
+    background-color: #4f4fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 120px;
+}
+.logo {
+    font-size: 60px;
+    color: white;
+    margin-right: 80px;
+    animation-name: logo;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+}
+.titulo-logo{
+    color: white;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 60px;
+    margin-left: 80px;
+}
+
+main{
+    background-color: #f2f2f2;
+    width: 100%;
+    min-height: 75vh;
+}
+
+main h2 {
+    padding-left: 100px;
+    background-color: #34349f;
+    color: white;
+}
+
+main section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+.pack{
+    width: 30%;
+}
+
+
+#contenedorPack{
+    background-color: #cfcfcf;
+    min-height: 100px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    padding: 1px 0px;
+}
+
+.armarpack{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+}
+
+
+/* cards */
+.imgitems {
+    width: 250px;
+    height: 250px;
+    object-fit:cover;
+    margin-bottom: 10px;
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.colorBoton {
+    color:white;
+    background-color: #4f4fff;
+    margin-bottom: 10px;
+}
+.colorBoton:hover {
+    background-color: #34349f;
+    color: white;
+}
+
+.itemPack{
+    background-color: rgb(237, 237, 237);
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.itemEnPack{
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px 5px;
+}
+
+.itemEnPack h3 {
+    margin: 0;
+}
+.itemEnPack button {
+    margin: 0;
+}
+
+.contenedorItem p {
+    margin: 0;
+}
+
+.piePack {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #cfcfcf;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.piePack h3 {
+    margin: 0;
+    font-size: 20px;
+}
+.piePack button {
+    margin: 0;
+}
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(216, 216, 216);
+    height: 100px;
+    padding: 0;
+    margin: 0;
+}
+
+footer ul li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer ul li a{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family:Arial, Helvetica, sans-serif;
+    color: rgb(46, 46, 46);
+}
+
+@keyframes logo {
+    0%{
+        opacity: 0;
+        transform: translateX(-600px);
+    }
+    100%{
+        opacity: 100%;
+        transform: translateX(0px);
+    }
+}
+
