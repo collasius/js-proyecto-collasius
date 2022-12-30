@@ -185,9 +185,14 @@ const mostrarPack = () => {
         boton.addEventListener("click", () => {
             eliminarDelPack(items.id);
         })
-        const boton2 = document.getElementById(`eliminar${items.id}`);
+        const boton2 = document.getElementById(`restar${items.id}`);
         boton2.addEventListener("click", () => {
-            restarDelPack(items.id);
+            if (items.cantidad >= 2) {
+                restarDelPack(items.id);
+            }else if (items.cantidad <= 1) {
+                eliminarDelPack(items.id);
+            }
+
         })
     })
     calcularTotal();
@@ -207,7 +212,7 @@ const restarDelPack = (id) => {
 }
 
 
-//Funcion que elimina el producto del carrito:
+//Funcion que elimina el producto del pack:
 
 const eliminarDelPack = (id) =>{
     const producto = pack.find(items => items.id === id);
@@ -225,7 +230,7 @@ vaciarPack.addEventListener("click", () => {
     eliminarTodoElPack();
 })
 
-//Funcion que eliminael carrito:
+//Funcion que elimina el carrito:
 const eliminarTodoElPack = () => {
     pack = [];
     mostrarPack();
@@ -233,7 +238,7 @@ const eliminarTodoElPack = () => {
     
 }
 
-//mostramos el mensaje con el total
+//mensaje con el total
 const total = document.getElementById("total");
 
 const calcularTotal = () => {
