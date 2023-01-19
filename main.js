@@ -1,250 +1,99 @@
-// AEROLINEAS-CODE 
-class Destino {
-    constructor(id, nombre, precio, img) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.img = img;
-        this.cantidad = 1;
-    }
-}
-class Clase {
-    constructor(id, nombre, precio, img) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.img = img;
-        this.cantidad = 1;
-    }
-}
+// elementos del html
+const pokeCarta = document.getElementById("pokeCarta");
+const pokeNombre = document.getElementById("pokeNombre");
+const pokeImg = document.getElementById("pokeImg");
+const pokeImgContenedor = document.getElementById("imgContenedor");
+const pokeId = document.getElementById("pokeId");
+const pokeClases = document.getElementById("pokeClases");
+const pokeStats = document.getElementById("pokeCaract");
 
-class Extra {
-    constructor(id, nombre, precio) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.cantidad = 1;
-    }
-}
+const buscar = document.getElementById("buscar");
 
-const colonia = new Destino(1, "Colonia", 15000, "img/colonia.jpg");
-const rioDeJaneiro = new Destino(2,"Rio de Janeiro", 35000,"img/rio.jpg");
-const miami = new Destino(3,"Miami", 160000, "img/miami.jpg");
+// colores
+const clasesColores = {
+    electric: '#FFEA70',
+    normal: '#B09398',
+    fire: '#FF675C',
+    water: '#0596C7',
+    ice: '#AFEAFD',
+    rock: '#999799',
+    flying: '#7AE7C7',
+    grass: '#4A9681',
+    psychic: '#FFC6D9',
+    ghost: '#561D25',
+    bug: '#A2FAA3',
+    poison: '#795663',
+    ground: '#D2B074',
+    dragon: '#DA627D',
+    steel: '#1D8A99',
+    fighting: '#2F2F2F',
+    default: '#2A1A1F',
+};
 
-const turista = new Clase(11, "Turista", 5000 , "img/turista.jpg");
-const ejecutivo = new Clase(12,"Ejecutivo", 30000 ,"img/ejecutivo.jpg");
-const primeraClase = new Clase(13,"Primera Clase", 35000,"img/primera.jpg");
-
-const extra1 = new Extra(111, "Desayuno", 2500);
-const extra2 = new Extra(112,"Traslado", 3000);
-
-const destinos = [colonia,rioDeJaneiro,miami];
-const clases = [turista,ejecutivo,primeraClase];
-const extras = [extra1,extra2];
-
-const items = [colonia,rioDeJaneiro,miami,turista,ejecutivo,primeraClase,extra1,extra2]
-
-let pack = [];
-
-// cargar carrito desde el localstorage
-if(localStorage.getItem("pack")){
-    pack = JSON.parse(localStorage.getItem("pack"));
-}
-
-const body = document.getElementById("body");
-body.onload = () => {mostrarPack()};
-
-const contenedorDestinos = document.getElementById("contenedorDestinos");
-const contenedorClases = document.getElementById("contenedorClases");
-const contenedorExtras = document.getElementById("contenedorExtras");
-
-//funcion para mostrar los items:
-
-const mostrarDestinos = () => {
-    destinos.forEach(destino => {
-        const card = document.createElement("div");
-        card.classList.add("col-xl-4");
-        card.innerHTML = `
-                <div class ="card">
-                    <img src="${destino.img}" class="card-img-top imgitems" alt="${destino.img}>"
-                    <div class= "card-body">
-                        <h5>${destino.nombre}</h5>
-                        <p>$${destino.precio.toLocaleString(`es`)}</p>
-                        <button class="btn colorBoton" id="boton${destino.id}" > Seleccionar </button>
-                    </div>
-                </div>
-            `                
-        contenedorDestinos.appendChild(card);
-
-        // agregar productos al pack:
-        const boton = document.getElementById(`boton${destino.id}`);
-        boton.addEventListener("click", () => {
-            agregarAlPack(destino.id);
-            mostrarPack();
-        })
-    })
-}
-const mostrarClases = () => {
-    clases.forEach(clase => {
-        const card = document.createElement("div");
-        card.classList.add("col-xl-4");
-        card.innerHTML = `
-                <div class ="card">
-                    <img src="${clase.img}" class="card-img-top imgitems" alt="${clase.img}>"
-                    <div class= "card-body">
-                        <h5>${clase.nombre}</h5>
-                        <p>$${clase.precio.toLocaleString(`es`)}</p>
-                        <button class="btn colorBoton" id="boton${clase.id}" > Seleccionar </button>
-                    </div>
-                </div>
-            `                
-        contenedorClases.appendChild(card);
-
-        //agregar productos al pack:
-        const boton = document.getElementById(`boton${clase.id}`);
-        boton.addEventListener("click", () => {
-            agregarAlPack(clase.id);
-            mostrarPack();
-        })
-    })
-}
-
-const mostrarExtras = () => {
-    extras.forEach(extra => {
-        const card = document.createElement("div");
-        card.classList.add("col-xl-6");
-        card.innerHTML = `
-                <div class ="card">
-                    <div class= "card-body">
-                        <h5>${extra.nombre}</h5>
-                        <p>$${extra.precio.toLocaleString(`es`)}</p>
-                        <button class="btn colorBoton" id="boton${extra.id}" > Seleccionar </button>
-                    </div>
-                </div>
-            `                
-        contenedorExtras.appendChild(card);
-
-        //agregar productos al pack:
-        const boton = document.getElementById(`boton${extra.id}`);
-        boton.addEventListener("click", () => {
-            agregarAlPack(extra.id);
-            mostrarPack();
-        })
-    })
-}
-
-mostrarDestinos();
-mostrarClases();
-mostrarExtras();
-
-
-// funcion agregar al pack:
-const agregarAlPack = (id) => {
-    const itemEnPack = pack.find(item => item.id === id);
-    if(itemEnPack) {
-        itemEnPack.cantidad++;
-    }else {
-        const item = items.find(item => item.id === id);
-        pack.push(item);
-    }
-
-    // trabajamos con localstorage
-    localStorage.setItem("pack", JSON.stringify(pack));
-    calcularTotal();
-    mostrarPack();
-}
-
-//Mostrar el carrito de compras:
-const contenedorPack = document.getElementById("contenedorPack");
-
-//Funcion para mostrar el carrito:
-
-const mostrarPack = () => {
-    contenedorPack.innerHTML = ""; 
-    pack.forEach(items => {
-        const item = document.createElement("div");
-        item.innerHTML = `
-                <div class ="itemPack">
-                    <div class= "itemEnPack">
-                        <h3>${items.nombre}</h3>
-                        <div class="contenedorItem">
-                            <p>Valor: $${(items.precio * items.cantidad).toLocaleString(`es`)} </p>
-                            <p>Cantidad: ${items.cantidad} </p>
-                        </div>
-                        <div>
-                            <button class="btn colorBoton" id="restar${items.id}" > <i class="fa-solid fa-minus"></i> </button>
-                            <button class="btn colorBoton" id="eliminar${items.id}" > <i class="fa-solid fa-xmark"></i> </button>
-                        </div>
-                    </div>
-                </div>
-            `                
-        contenedorPack.appendChild(item);
-
-        // Eliminar productos del carrito:
-        const boton = document.getElementById(`eliminar${items.id}`);
-        boton.addEventListener("click", () => {
-            eliminarDelPack(items.id);
-        })
-        const boton2 = document.getElementById(`restar${items.id}`);
-        boton2.addEventListener("click", () => {
-            if (items.cantidad >= 2) {
-                restarDelPack(items.id);
-            }else if (items.cantidad <= 1) {
-                eliminarDelPack(items.id);
-            }
-
-        })
-    })
-    calcularTotal();
-}
-
-// funcion agregar al pack:
-const restarDelPack = (id) => {
-    const itemEnPack = pack.find(item => item.id === id);
-    if(itemEnPack) {
-        itemEnPack.cantidad --;
-    }
-
-    // trabajamos con localstorage
-    localStorage.setItem("pack", JSON.stringify(pack));
-    calcularTotal();
-    mostrarPack();
-}
-
-
-//Funcion que elimina el producto del pack:
-
-const eliminarDelPack = (id) =>{
-    const producto = pack.find(items => items.id === id);
-    const indice = pack.indexOf(producto);
-    pack.splice(indice,1);
-    mostrarPack();
-    // trabajamos con el local storage
-    localStorage.setItem("pack", JSON.stringify(pack));
-}
-
-//Vaciar todo el pack.
-const vaciarPack = document.getElementById("vaciarPack");
-
-vaciarPack.addEventListener("click", () => {
-    eliminarTodoElPack();
+//evento para buscar pokemon
+buscar.addEventListener("submit", (e) => {
+    e.preventDefault();
+    buscarPokemon();
 })
 
-//Funcion que elimina el carrito:
-const eliminarTodoElPack = () => {
-    pack = [];
-    mostrarPack();
-    localStorage.clear();
-    
+// funcion para buscar pokemon
+const buscarPokemon = () => {
+    const {value} = event.target.pokemon;
+    fetch(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`)
+        .then(data => data.json())
+        .then(response => mostrarInfoPokemon(response))
+        .catch(err => pokemonNoEncontrado())
 }
 
-//mensaje con el total
-const total = document.getElementById("total");
+// funcion para mostrar pokemon
+const mostrarInfoPokemon = data => {
+    const sprite =  data.sprites.front_default;
+    const { stats, types } = data;
+    pokeNombre.textContent = data.name;
+    pokeImg.setAttribute('src', sprite);
+    pokeId.textContent = `Nº ${data.id}`;
+    colorCarta(types);
+    mostrarClasePokemon(types);
+    mostrarCaractPokemon(stats);
+}
 
-const calcularTotal = () => {
-    let totalCompra = 0;
-    pack.forEach(producto => {
-        totalCompra += producto.precio * producto.cantidad;
-    })
-    total.innerHTML = `$${totalCompra.toLocaleString(`es`)}`;
+// funcion para mostrar el color de fondo del pokemon
+const colorCarta = types => {
+    const colorUno = clasesColores[types[0].type.name];
+    const colorDos = types[1] ? clasesColores[types[1].type.name] : clasesColores.default;
+    pokeImg.style.background =  `radial-gradient(${colorDos} 33%, ${colorUno} 33%)`;
+    pokeImg.style.backgroundSize = ' 5px 5px';
+}
+
+const mostrarClasePokemon = types => {
+    pokeClases.innerHTML = '';
+    types.forEach(type => {
+        const ClaseTextoElemento = document.createElement("div");
+        ClaseTextoElemento.style.color = clasesColores[type.type.name];
+        ClaseTextoElemento.textContent = type.type.name;
+        pokeClases.appendChild(ClaseTextoElemento);
+    });
+}
+
+const mostrarCaractPokemon = stats => {
+    pokeStats.innerHTML = '';
+    stats.forEach(stat => {
+        const caractElemento = document.createElement("div");
+        const caractNombreElemento = document.createElement("div");
+        const caractValorElemento = document.createElement("div");
+        caractNombreElemento.textContent = stat.stat.name;
+        caractValorElemento.textContent = stat.base_stat;
+        caractElemento.appendChild(caractNombreElemento);
+        caractElemento.appendChild(caractValorElemento);
+        pokeStats.appendChild(caractElemento);
+    });
+}
+
+const pokemonNoEncontrado = () =>{
+    pokeNombre.textContent = "No encontrado";
+    pokeImg.setAttribute("src", "img/interrogacion.png")
+    pokeImg.style.background = "#fff";
+    pokeClases.innerHTML = "";
+    pokeStats.innerHTML = "";
+    pokeId.innerHTML = "";
 }
