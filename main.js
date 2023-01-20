@@ -139,7 +139,6 @@ const pokemonNoEncontrado = () =>{
         duration: 3000,
         gravity: "top",
         position: "right",
-        close:true,
         style:{
             background: "radial-gradient(grey 33%, black 33%)",
             backgroundSize: "3px 3px",
@@ -157,14 +156,44 @@ const capturarPokemon = (id) =>{
     const pokemonEnMochila = mochilaContenido.find(poke => poke.id === id);
     if(pokemonEnMochila){
         pokemonEnMochila.cantidad++;
+        Toastify({
+            text: "Pokemón en mochila",
+            duration: 2000,
+            gravity: "top",
+            position: "right",
+            style:{
+                background: "radial-gradient(grey 33%, white 33%)",
+                backgroundSize: "3px 3px",
+                color: "black",
+                fontFamily: " 'Orbitron', sans-serif",
+                borderRadius: "4px",
+                border: "1px solid black",
+            }
+        }).showToast();
     }else{
     const poke = pokemonesBuscados.find(poke => poke.id === id);
     mochilaContenido.push(poke);
+
+    Toastify({
+        text: "Pokemón capturado",
+        duration: 2000,
+        gravity: "top",
+        position: "right",
+        style:{
+            background: "radial-gradient(black 33%, red 33%)",
+            backgroundSize: "3px 3px",
+            color: "black",
+            fontFamily: " 'Orbitron', sans-serif",
+            borderRadius: "4px",
+            border: "1px solid black",
+        }
+    }).showToast();
     }
 
     mostrarMochila();
 }
 
+// funcion para mostrar mochila
 const mostrarMochila = () => {
     mochila.innerHTML = "";
 
@@ -177,7 +206,36 @@ const mostrarMochila = () => {
 
                     <div class="pokebola-fondo"></div>
                 </div>
+                <button class="btn-liberar" id="liberar${pokemon.id}" >Liberar a ${pokemon.nombre}</button>
                         `
         mochila.appendChild(pokebola);
+
+        const liberar = document.getElementById(`liberar${pokemon.id}`);
+        liberar.addEventListener("click", () => {
+            liberarPokemon(pokemon.id);
+        })
     })
+}
+
+// funcion para liberar pokemon
+const liberarPokemon = (id) => {
+    const pokemon = mochilaContenido.find(pokemon => pokemon.id === id);
+    const indice = mochilaContenido.indexOf(pokemon);
+    mochilaContenido.splice(indice, 1);
+    mostrarMochila();
+
+    Toastify({
+        text: "Pokemón liberado",
+        duration: 2000,
+        gravity: "top",
+        position: "right",
+        style:{
+            background: "radial-gradient(black 33%, white 33%)",
+            backgroundSize: "3px 3px",
+            color: "red",
+            fontFamily: " 'Orbitron', sans-serif",
+            borderRadius: "4px",
+            border: "1px solid black",
+        }
+    }).showToast();
 }

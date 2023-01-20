@@ -2,6 +2,9 @@ body{
     background-color: rgb(214, 214, 214);
 }
 
+*{
+    box-sizing: border-box;
+}
 .contenedor-pokedex {
     display: flex;
     flex-direction: column;
@@ -117,6 +120,35 @@ input {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.pokebolas{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.btn-liberar{
+    border: 1px solid black;
+    border-radius: 4px;
+    max-width: 100px;
+    margin-top: 10px;
+    display: none;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.btn-liberar:hover{
+    background: radial-gradient(rgb(65, 65, 65) 33%, rgb(238, 238, 238) 33%);
+    background-size: 3px 3px;
+}
+
+.pokebolas:hover .btn-liberar{
+    display: block;
+    z-index: 200;
 }
 
 .pokebola{
@@ -135,8 +167,9 @@ input {
 
 .pokebola-fondo{
     width: 96px;
-    height: 50px;
-    background-color: rgb(95, 95, 95);
+    height: 96px;
+    background: radial-gradient(black 33%, rgb(160, 160, 160) 33%);
+    background-size: 3px 3px;
     border-radius: 50%;
     position: relative;
     z-index: auto;
