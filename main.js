@@ -6,8 +6,8 @@ const pokeImgContenedor = document.getElementById("imgContenedor");
 const pokeId = document.getElementById("pokeId");
 const pokeClases = document.getElementById("pokeClases");
 const pokeStats = document.getElementById("pokeCaract");
-
 const buscar = document.getElementById("buscar");
+const agregar = document.getElementById("contenedorBtn")
 
 // colores
 const clasesColores = {
@@ -43,6 +43,9 @@ const buscarPokemon = () => {
         .then(data => data.json())
         .then(response => mostrarInfoPokemon(response))
         .catch(err => pokemonNoEncontrado())
+    
+    // quitar el boton capturar al buscar
+    agregar.innerHTML = "";
 }
 
 // funcion para mostrar pokemon
@@ -55,6 +58,12 @@ const mostrarInfoPokemon = data => {
     colorCarta(types);
     mostrarClasePokemon(types);
     mostrarCaractPokemon(stats);
+
+    // sumar boton capturar
+    const capturar = document.createElement("button");
+    capturar.classList.add("capturar");
+    capturar.textContent = "Capturar";
+    agregar.appendChild(capturar);
 }
 
 // funcion para mostrar el color de fondo del pokemon
@@ -101,8 +110,8 @@ const pokemonNoEncontrado = () =>{
     pokeId.innerHTML = "";
 
     Toastify({
-        text: "Pokemon no encontrado",
-        duration: 5000,
+        text: "Pokemón no encontrado",
+        duration: 3000,
         gravity: "top",
         position: "right",
         close:true,
@@ -115,4 +124,20 @@ const pokemonNoEncontrado = () =>{
             border: "1px solid black",
         }
     }).showToast();
+}
+
+// boton para capturar
+const mostrarBtnAgregar = () => {
+    const capturar = document.createElement("div");
+    capturar.classList.add("btn-capturar");
+    card.innerHTML = `
+                <button class="agregar" id="boton${type.type.name}" > Capturar </button>
+                `
+    agregar.appendChild(capturar);
+
+    //Agregar productos al carrito: 
+    // const boton = document.getElementById(`boton${producto.id}`);
+    // boton.addEventListener("click", () => {
+    //     agregarAlCarrito(producto.id);
+    // })
 }
