@@ -12,11 +12,11 @@ const buscar = document.getElementById("buscar");
 // colores
 const clasesColores = {
     electric: '#FFEA70',
-    normal: '#B09398',
+    normal: '#cfbabd',
     fire: '#FF675C',
     water: '#0596C7',
     ice: '#AFEAFD',
-    rock: '#999799',
+    rock: '#b4b4b4',
     flying: '#7AE7C7',
     grass: '#4A9681',
     psychic: '#FFC6D9',
@@ -65,16 +65,18 @@ const colorCarta = types => {
     pokeImg.style.backgroundSize = ' 5px 5px';
 }
 
+// funcion para mostrar las clases
 const mostrarClasePokemon = types => {
     pokeClases.innerHTML = '';
     types.forEach(type => {
         const ClaseTextoElemento = document.createElement("div");
-        ClaseTextoElemento.style.color = clasesColores[type.type.name];
+        ClaseTextoElemento.style.backgroundColor = clasesColores[type.type.name];
         ClaseTextoElemento.textContent = type.type.name;
         pokeClases.appendChild(ClaseTextoElemento);
     });
 }
 
+// funcion para mostrar las caracteristicas
 const mostrarCaractPokemon = stats => {
     pokeStats.innerHTML = '';
     stats.forEach(stat => {
@@ -89,6 +91,7 @@ const mostrarCaractPokemon = stats => {
     });
 }
 
+// funcion si no se encuentra el pokemon
 const pokemonNoEncontrado = () =>{
     pokeNombre.textContent = "No encontrado";
     pokeImg.setAttribute("src", "img/interrogacion.png")
@@ -96,4 +99,20 @@ const pokemonNoEncontrado = () =>{
     pokeClases.innerHTML = "";
     pokeStats.innerHTML = "";
     pokeId.innerHTML = "";
+
+    Toastify({
+        text: "Pokemon no encontrado",
+        duration: 5000,
+        gravity: "top",
+        position: "right",
+        close:true,
+        style:{
+            background: "radial-gradient(grey 33%, black 33%)",
+            backgroundSize: "3px 3px",
+            color: "white",
+            fontFamily: " 'Orbitron', sans-serif",
+            borderRadius: "4px",
+            border: "1px solid black",
+        }
+    }).showToast();
 }

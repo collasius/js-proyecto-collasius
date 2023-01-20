@@ -72,3 +72,15 @@ input {
     width: 180px;
     border-radius: 50%;
 }
+
+
+/* midificacion de estilo toastify */
+.toast-close {
+    font-family: 'Orbitron', sans-serif !important;
+    opacity: 0.8!important;
+    padding: 0px 10px!important;
+}
+.toastify {
+    box-shadow: 0 3px 6px -1px #0000001f, 0 10px 36px -4px rgba(37, 37, 37, 0.3) !important;
+    cursor: default!important;
+}
