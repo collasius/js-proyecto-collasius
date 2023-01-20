@@ -205,6 +205,13 @@ const mostrarMochila = () => {
                     <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" class="img-poke-cap">
 
                     <div class="pokebola-fondo"></div>
+                    <div class="pokeball">
+                    <div class="pokeball-superior">
+                    </div>
+                    <div class="pokeball-frontal"></div>
+                    <div class="pokeball-inferior">
+                    </div>
+                </div>
                 </div>
                 <button class="btn-liberar" id="liberar${pokemon.id}" >Liberar a ${pokemon.nombre}</button>
                         `
