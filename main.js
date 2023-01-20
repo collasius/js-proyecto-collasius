@@ -13,6 +13,14 @@ const mochila = document.getElementById("mochila")
 let pokemonesBuscados = []
 let mochilaContenido = []
 
+// cargar mochila desde el localstorage
+if(localStorage.getItem("mochilaContenido")){
+    mochilaContenido = JSON.parse(localStorage.getItem("mochilaContenido"));
+}
+
+const body = document.getElementById("body");
+ body.onload = () => {mostrarMochila()};
+
 class Pokemon {
     constructor(id, nombre, img) {
         this.id = id;
@@ -190,6 +198,9 @@ const capturarPokemon = (id) =>{
     }).showToast();
     }
 
+    // trabajamos con localstorage
+    localStorage.setItem("mochilaContenido", JSON.stringify(mochilaContenido));
+
     mostrarMochila();
 }
 
@@ -245,4 +256,6 @@ const liberarPokemon = (id) => {
             border: "1px solid black",
         }
     }).showToast();
+    // trabajamos con el local storage
+    localStorage.setItem("mochilaContenido", JSON.stringify(mochilaContenido));
 }
