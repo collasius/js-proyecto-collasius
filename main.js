@@ -8,6 +8,18 @@ const pokeClases = document.getElementById("pokeClases");
 const pokeStats = document.getElementById("pokeCaract");
 const buscar = document.getElementById("buscar");
 const agregar = document.getElementById("contenedorBtn")
+const mochila = document.getElementById("mochila")
+
+let pokemonesBuscados = []
+let mochilaContenido = []
+
+class Pokemon {
+    constructor(id, nombre,) {
+        this.id = id;
+        this.nombre = nombre;
+        this.cantidad = 1;
+    }
+}
 
 // colores
 const clasesColores = {
@@ -60,10 +72,22 @@ const mostrarInfoPokemon = data => {
     mostrarCaractPokemon(stats);
 
     // sumar boton capturar
-    const capturar = document.createElement("button");
-    capturar.classList.add("capturar");
-    capturar.textContent = "Capturar";
+    const capturar = document.createElement("div");
+    capturar.classList.add("contenedor-capturar");
+    capturar.innerHTML=`
+    <button class="capturar" id="capturar${data.id}" > Capturar </button>
+    `
     agregar.appendChild(capturar);
+
+    // crar objeto pokemon
+    const poke = new Pokemon(data.id, data.name)
+    pokemonesBuscados.push(poke);
+
+    // Capturar pokemones: 
+    const btnCapturar = document.getElementById(`capturar${data.id}`);
+    btnCapturar.addEventListener("click", () => {
+    capturarPokemon(data.id);
+    })
 }
 
 // funcion para mostrar el color de fondo del pokemon
@@ -126,18 +150,45 @@ const pokemonNoEncontrado = () =>{
     }).showToast();
 }
 
-// boton para capturar
-const mostrarBtnAgregar = () => {
-    const capturar = document.createElement("div");
-    capturar.classList.add("btn-capturar");
-    card.innerHTML = `
-                <button class="agregar" id="boton${type.type.name}" > Capturar </button>
-                `
-    agregar.appendChild(capturar);
 
-    //Agregar productos al carrito: 
-    // const boton = document.getElementById(`boton${producto.id}`);
-    // boton.addEventListener("click", () => {
-    //     agregarAlCarrito(producto.id);
-    // })
+// funcion para capturar pokeemones
+const capturarPokemon = (id) =>{
+    const pokemonEnMochila = mochilaContenido.find(poke => poke.id === id);
+    if(pokemonEnMochila){
+        pokemonEnMochila.cantidad++;
+    }else{
+    const poke = pokemonesBuscados.find(poke => poke.id === id);
+    mochilaContenido.push(poke);
+    }
+
+    mostrarMochila();
+}
+
+const mostrarMochila = () => {
+    mochila.innerHTML = "";
+
+    pokemonEnMochila.forEach(poke => {
+        const pokebola = document.createElement("div");
+        pokebola.classList.add("pokebola");
+        pokebola.innerHTML = `
+                <div class="tarjeta">
+                    <img src="pokebola.png" class="card-img-top imgProductos" alt="${producto.nombre}">
+                    <div class= "card-body">
+                        <h5>${producto.nombre}</h5>
+                        <p> ${producto.precio} </p>
+                        <p> ${producto.cantidad} </p>
+                        <button class="btn colorBoton" id="eliminar${producto.id}" > Eliminar Producto </button>
+                    </div>
+                </div>
+                        `
+        contenedorCarrito.appendChild(card);
+
+        //Eliminar productos del carrito: 
+        const boton = document.getElementById(`eliminar${producto.id}`);
+        boton.addEventListener("click", () => {
+            eliminarDelCarrito(producto.id);
+        })
+
+    })
+    calcularTotal();
 }

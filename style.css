@@ -94,6 +94,13 @@ input {
 .capturar:hover{
     background: radial-gradient(black 33%, white 33%);
     background-size: 3px 3px;
+    transition-duration: 0.3s;
+}
+.capturar:active{
+    background: radial-gradient(black 33%, rgb(182, 182, 182) 33%);
+    background-size: 3px 3px;
+    transform: scale(0.95);
+
 }
 /* midificacion de estilo toastify */
 .toast-close {
