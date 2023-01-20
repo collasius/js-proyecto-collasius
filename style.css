@@ -112,3 +112,32 @@ input {
     box-shadow: 0 3px 6px -1px #0000001f, 0 10px 36px -4px rgba(37, 37, 37, 0.3) !important;
     cursor: default!important;
 }
+
+.mochila{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.pokebola{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    position: relative;
+    justify-content: center;
+    margin: 10px;
+}
+
+.img-poke-cap{
+    position: absolute;
+    z-index: 100;
+}
+
+.pokebola-fondo{
+    width: 96px;
+    height: 50px;
+    background-color: rgb(95, 95, 95);
+    border-radius: 50%;
+    position: relative;
+    z-index: auto;
+}

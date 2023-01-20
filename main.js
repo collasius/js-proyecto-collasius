@@ -14,9 +14,10 @@ let pokemonesBuscados = []
 let mochilaContenido = []
 
 class Pokemon {
-    constructor(id, nombre,) {
+    constructor(id, nombre, img) {
         this.id = id;
         this.nombre = nombre;
+        this.img = img;
         this.cantidad = 1;
     }
 }
@@ -167,28 +168,16 @@ const capturarPokemon = (id) =>{
 const mostrarMochila = () => {
     mochila.innerHTML = "";
 
-    pokemonEnMochila.forEach(poke => {
+    mochilaContenido.forEach(pokemon => {
         const pokebola = document.createElement("div");
-        pokebola.classList.add("pokebola");
+        pokebola.classList.add("pokebolas");
         pokebola.innerHTML = `
-                <div class="tarjeta">
-                    <img src="pokebola.png" class="card-img-top imgProductos" alt="${producto.nombre}">
-                    <div class= "card-body">
-                        <h5>${producto.nombre}</h5>
-                        <p> ${producto.precio} </p>
-                        <p> ${producto.cantidad} </p>
-                        <button class="btn colorBoton" id="eliminar${producto.id}" > Eliminar Producto </button>
-                    </div>
+                <div class="pokebola">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" class="img-poke-cap">
+
+                    <div class="pokebola-fondo"></div>
                 </div>
                         `
-        contenedorCarrito.appendChild(card);
-
-        //Eliminar productos del carrito: 
-        const boton = document.getElementById(`eliminar${producto.id}`);
-        boton.addEventListener("click", () => {
-            eliminarDelCarrito(producto.id);
-        })
-
+        mochila.appendChild(pokebola);
     })
-    calcularTotal();
 }
