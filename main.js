@@ -9,6 +9,7 @@ const pokeStats = document.getElementById("pokeCaract");
 const buscar = document.getElementById("buscar");
 const agregar = document.getElementById("contenedorBtn")
 const mochila = document.getElementById("mochila")
+const contadorText = document.getElementById("contadorText")
 
 let pokemonesBuscados = []
 let mochilaContenido = []
@@ -233,6 +234,15 @@ const mostrarMochila = () => {
             liberarPokemon(pokemon.id);
         })
     })
+
+        // contador de pokemones
+    const contadorPoke = mochilaContenido.length;
+    console.log(mochilaContenido.length);
+
+    contadorText.innerText = `- ${contadorPoke}`;
+    if (contadorPoke == 0) {
+        contadorText.innerText = " - 0";
+    }
 }
 
 // funcion para liberar pokemon
