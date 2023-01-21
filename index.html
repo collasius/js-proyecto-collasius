@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- cdn font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- toastify -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <!-- mi css -->
@@ -16,7 +18,7 @@
 </head>
 
 <body id="body">
-    
+    <h1 class="oculto">Pokedex</h1>
     <div class="contenedor-pokedex">
         <form action="" onsubmit="buscarPokemon" id="buscar">
             <input type="text" name="pokemon" autocomplete="off">
@@ -32,7 +34,23 @@
         </div>
         <div class="boton-agregar" id="contenedorBtn"></div>
     </div>
-    <div class="mochila" id="mochila"></div>
+
+    <section class="mochila-mochila">
+        <input type="checkbox" id="check">
+        <label for="check" class="boton-check">
+            <img src="./img/mochila.png" alt="mochila" class="mochila-logo">
+        </label>
+        <div class="mochila-abierta">
+            <div class="mochila-bakgraund"></div>
+            <div class="contenedor-mochila">
+                <h2 class="titulo-mochila">Mochila</h2>
+                <div class="gestor-mochila">
+                </div>
+                <div class="mochila" id="mochila">
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- toastify -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
