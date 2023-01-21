@@ -27,21 +27,26 @@ body.onload = () => {
 
 
 // funcion cambiar fondo en base la hora
-const cambiarFondo = () => {
-    const hora = new Date()
-    const tiempo = hora.getHours()
-    console.log(tiempo);
-    if (tiempo >= 9 && tiempo < 18){
+function cambiarFondo() {
+    const hora = new Date();
+    const tiempo = hora.getHours();
+
+    if (tiempo >= 9 && tiempo < 18) {
         body.classList.add("fondo-dia");
-    } else if (tiempo >= 18 && tiempo < 20){
+
+    } else if (tiempo >= 18 && tiempo < 20) {
         body.classList.add("fondo-tarde");
-    } else if (tiempo >= 20 && tiempo < 6){
+
+    } else if (tiempo >= 20 && tiempo < 6) {
         body.classList.add("fondo-noche");
-    } else if (tiempo >= 6 && tiempo < 9){
+
+    } else if (tiempo >= 6 && tiempo < 9) {
         body.classList.add("fondo-amanecer");
-    }else{
+        
+    } else {
         body.classList.add("fondo-dia");
     }
+
 }
 
 
