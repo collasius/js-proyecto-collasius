@@ -20,7 +20,32 @@ if(localStorage.getItem("mochilaContenido")){
 }
 
 const body = document.getElementById("body");
- body.onload = () => {mostrarMochila()};
+body.onload = () => {
+    cambiarFondo()
+    mostrarMochila()
+};
+
+
+// funcion cambiar fondo en base la hora
+const cambiarFondo = () => {
+    const hora = new Date()
+    const tiempo = hora.getHours()
+    console.log(tiempo);
+    if (tiempo >= 9 && tiempo < 18){
+        body.classList.add("fondo-dia");
+    } else if (tiempo >= 18 && tiempo < 20){
+        body.classList.add("fondo-tarde");
+    } else if (tiempo >= 20 && tiempo < 6){
+        body.classList.add("fondo-noche");
+    } else if (tiempo >= 6 && tiempo < 9){
+        body.classList.add("fondo-amanecer");
+    }else{
+        body.classList.add("fondo-dia");
+    }
+}
+
+
+
 
 class Pokemon {
     constructor(id, nombre, img) {
@@ -145,7 +170,7 @@ const pokemonNoEncontrado = () =>{
 
     Toastify({
         text: "Pokemón no encontrado",
-        duration: 3000,
+        duration: 2000,
         gravity: "top",
         position: "right",
         style:{

@@ -1,8 +1,28 @@
 body{
-    background-color: rgb(214, 214, 214);
+    background-position: top;
+    background-size:cover; 
+    background-repeat: no-repeat;
     padding: 0;
     margin: 0;
 }
+
+.fondo-amanecer{
+    background-image: url(/img/background-amanecer.jpg);
+    background-color: #939132;
+}
+.fondo-dia{
+    background-image: url(/img/background.jpg);
+    background-color: #7fad71;
+}
+.fondo-tarde{
+    background-image: url(/img/background-anochecer.jpeg);
+    background-color: #1a081c;
+}
+.fondo-noche{
+    background-image: url(/img/background-noche.jpeg);
+    background-color: #1e1952;
+}
+
 
 .oculto{
     display: none;
