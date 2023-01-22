@@ -31,7 +31,7 @@ function cambiarFondo() {
     const hora = new Date();
     const tiempo = hora.getHours();
 
-    if(tiempo == 0 && tiempo < 6) {
+    if(tiempo >= 0 && tiempo < 6) {
         body.classList.add("fondo-noche");
 
     }else if (tiempo >= 6 && tiempo < 9) {
