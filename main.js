@@ -115,7 +115,7 @@ const mostrarInfoPokemon = data => {
     // baya
     baya.innerHTML =`
         <button class="btn-baya" id="btnBaya">
-            <img src="/img/baya.png" alt="" class="img-baya">
+            <img src="img/baya.png" alt="" class="img-baya">
         </button>
     `
     const btnBaya = document.getElementById("btnBaya")
