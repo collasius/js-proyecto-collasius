@@ -27,6 +27,9 @@ body{
 .oculto{
     display: none;
 }
+.visual{
+    display: block;
+}
 
 *{
     box-sizing: border-box;
@@ -394,3 +397,29 @@ input {
     background-size: 3px 3px;
     opacity: 100%;
 }
+
+.btn-baya{
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    opacity: 50%;
+    transition-duration: 0.3s;
+}
+.img-baya{
+    height: 60px;
+    transform: rotateZ(40deg);
+}
+
+.btn-baya:hover{
+    transform: scale(1.1);
+    opacity: 100%;
+}
+.btn-baya:active{
+    transform: scale(0.9);
+    opacity: 100%;
+}
+#check:checked ~ * .btn-baya{
+    display: none;
+}
+

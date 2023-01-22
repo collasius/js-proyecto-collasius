@@ -10,6 +10,7 @@ const buscar = document.getElementById("buscar");
 const agregar = document.getElementById("contenedorBtn")
 const mochila = document.getElementById("mochila")
 const contadorText = document.getElementById("contadorText")
+const baya = document.getElementById("baya")
 
 let pokemonesBuscados = []
 let mochilaContenido = []
@@ -51,8 +52,6 @@ function cambiarFondo() {
     }
 
 }
-
-
 
 
 class Pokemon {
@@ -113,7 +112,16 @@ const mostrarInfoPokemon = data => {
     colorCarta(types);
     mostrarClasePokemon(types);
     mostrarCaractPokemon(stats);
-
+    // baya
+    baya.innerHTML =`
+        <button class="btn-baya" id="btnBaya">
+            <img src="/img/baya.png" alt="" class="img-baya">
+        </button>
+    `
+    const btnBaya = document.getElementById("btnBaya")
+    btnBaya.addEventListener("click", () => {
+        suministrar()
+    })
     // sumar boton capturar
     const capturar = document.createElement("div");
     capturar.classList.add("contenedor-capturar");
@@ -175,6 +183,7 @@ const pokemonNoEncontrado = () =>{
     pokeClases.innerHTML = "";
     pokeStats.innerHTML = "";
     pokeId.innerHTML = "";
+    baya.innerHTML ="";
 
     Toastify({
         text: "Pokemón no encontrado",
@@ -196,6 +205,8 @@ const pokemonNoEncontrado = () =>{
 // funcion para capturar pokeemones
 const capturarPokemon = (id) =>{
     const pokemonEnMochila = mochilaContenido.find(poke => poke.id === id);
+    const random = Math.round(Math.random())
+
     if(pokemonEnMochila){
         pokemonEnMochila.cantidad++;
         Toastify({
@@ -212,7 +223,22 @@ const capturarPokemon = (id) =>{
                 border: "1px solid black",
             }
         }).showToast();
-    }else{
+    } else if (random === 1){
+        Toastify({
+            text: "Ops! intenta darle una baya",
+            duration: 2000,
+            gravity: "top",
+            position: "right",
+            style:{
+                background: "radial-gradient(black 33%, yellow 33%)",
+                backgroundSize: "3px 3px",
+                color: "black",
+                fontFamily: " 'Orbitron', sans-serif",
+                borderRadius: "4px",
+                border: "1px solid black",
+            }
+        }).showToast();
+    }else if (random === 0){
     const poke = pokemonesBuscados.find(poke => poke.id === id);
     mochilaContenido.push(poke);
 
@@ -270,7 +296,6 @@ const mostrarMochila = () => {
 
         // contador de pokemones
     const contadorPoke = mochilaContenido.length;
-    console.log(mochilaContenido.length);
 
     contadorText.innerText = `- ${contadorPoke}`;
     if (contadorPoke == 0) {
@@ -301,4 +326,23 @@ const liberarPokemon = (id) => {
     }).showToast();
     // trabajamos con el local storage
     localStorage.setItem("mochilaContenido", JSON.stringify(mochilaContenido));
+}
+
+// suministrar baya: 
+
+const suministrar = () => {
+    Toastify({
+        text: "Baya suministrada",
+        duration: 1000,
+        gravity: "top",
+        position: "center",
+        style:{
+            background: "radial-gradient(white 33%, red 33%)",
+            backgroundSize: "3px 3px",
+            color: "white",
+            fontFamily: " 'Orbitron', sans-serif",
+            borderRadius: "4px",
+            border: "1px solid black",
+        }
+    }).showToast();
 }
