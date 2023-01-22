@@ -7,19 +7,19 @@ body{
 }
 
 .fondo-amanecer{
-    background-image: url(/img/background-amanecer.jpg);
+    background-image: url(img/background-amanecer.jpg);
     background-color: #939132;
 }
 .fondo-dia{
-    background-image: url(/img/background.jpg);
+    background-image: url(img/background.jpg);
     background-color: #7fad71;
 }
 .fondo-tarde{
-    background-image: url(/img/background-anochecer.jpeg);
+    background-image: url(img/background-anochecer.jpeg);
     background-color: #1a081c;
 }
 .fondo-noche{
-    background-image: url(/img/background-noche.jpeg);
+    background-image: url(img/background-noche.jpeg);
     background-color: #1e1952;
 }
 
